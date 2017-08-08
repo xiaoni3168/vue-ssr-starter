@@ -15,7 +15,7 @@ export default {
 </script>
 <style lang="sass" scoped>
 .signin-view {
-    
+    background-color: #2888e5;
 }
 </style>
 

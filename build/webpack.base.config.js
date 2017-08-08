@@ -23,6 +23,7 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
+                exclude: /node_modules/,
                 options: vueConfig
             },
             {
@@ -46,7 +47,10 @@ module.exports = {
             })
         ]
         : [
-            new FriendlyErrorsPlugin()
+            new FriendlyErrorsPlugin(),
+            new ExtractTextPlugin({
+                filename: 'common.[chunkhash].css'
+            })
         ],
     devtool: isProd ? false : '#cheap-module-source-map'
 }
