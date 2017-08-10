@@ -5,7 +5,7 @@
                      {{$index + 1}} 
                 </text>  -->
             <circle v-for="(point, $index) in backPoints" :key="$index" :cx="point[0]" :cy="point[1]" r="2" fill="#f5f5f5"></circle> 
-            <circle v-for="(point, $index) in pois" :key="$index" :cx="point[0]" :cy="point[1]" r="6" fill="#f5f5f5" stroke="#efefef" stroke-width="3"></circle>
+            <circle v-for="(point, $index) in pois" :key="$index" :cx="point[0]" :cy="point[1]" r="6" :fill="fillColor(point)" stroke="#efefef" stroke-width="3"></circle>
             <polyline v-for="(line, $index) in lines" :key="$index" :points="line" :stroke-width="lineWidth" :stroke="lineColor(line)"></polyline>
         </svg>
     </div>
@@ -25,7 +25,7 @@ export default {
             viewWidth: 0,
             lineWidth: 2,
             timer: null,
-            lineLength: 50,
+            lineLength: 1,
             updateTime: 100000,
 
             backPoints: []
@@ -64,7 +64,7 @@ export default {
                 this.updateTime / 1000,
                 {
                     tweenPoints: this.wrapTweenPoints(n),
-                    ease:Linear.easeNone
+                    ease:Linear.easeInOut
                 }
             );
         }
@@ -123,6 +123,9 @@ export default {
         },
         lineColor: function (line) {
             return `hsl(${line[0][0] / this.viewWidth * 270}, 100%, 80%)`;
+        },
+        fillColor: function (point) {
+            return `hsl(${point[1] / this.viewHeight * 270}, 100%, 80%)`;
         }
     }
 }
